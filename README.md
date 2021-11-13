@@ -1,115 +1,25 @@
 # nvjdc
-Net core5  vue3 puppeteer sharp的一次尝试
+
 
 ## 提示
-[TG 频道](https://t.me/joinchat/4nf-VfnBN6pmZDdl) 
+登陆上传CK还事这一部分没有变，滑块轨迹变了 轨迹我就不放出来了 容易凉
 
-[TG 群组](https://t.me/joinchat/dL-NJh1G6bc2OGM1) 
+由于我自己的环境是centos x86，arm不支持
 
-由于我自己的环境是centos x86，arm并未测试
-
-
-更新自动五次滑块
 
 在Fork就跑路
 
-一个文档你们Fork啥啊，，
 ## 支持的架构
 ![image](https://user-images.githubusercontent.com/87279659/137679751-7c2e901f-0429-4c5c-a6d2-120b8848048f.png)
 查看地址:https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0-supported-os.md
 
 
 ## 安装教程
-1 执行命令
 
-```
-yum install wget unzip -y
-```
-
-2创建一个目录放配置以及chromium
-
-```
-mkdir nolanjdc && cd nolanjdc
-```
-
-3下载config.json 配置文件 并且修改自己的配置 不能缺少
-
-```
-wget -O Config.json  https://raw.githubusercontent.com/NolanHzy/nvjdc/main/Config.json
-```
-国内请使用
- ```
-wget -O Config.json   https://ghproxy.com/https://raw.githubusercontent.com/NolanHzy/nvjdc/main/Config.json
-```
-
-4 创建chromium文件夹并进入
-
-```
-mkdir -p  .local-chromium/Linux-884014 && cd .local-chromium/Linux-884014
-```
-
-5下载 chromium 
-
-```
-wget https://mirrors.huaweicloud.com/chromium-browser-snapshots/Linux_x64/884014/chrome-linux.zip && unzip chrome-linux.zip
-```
-
-6删除刚刚下载的压缩包 
-
-```
-rm  -f chrome-linux.zip
-```
-
-7 回到刚刚创建的目录
-
-```
-cd  /nolanjdc
-```
-
-8拉镜像
-
-```
-sudo docker pull nolanhzy/nvjdc:0.5
-```
-
-9启动镜像
-
-```
-sudo docker run   --name nolanjdc -p 5701:80 -d  -v  "$(pwd)"/Config.json:/app/Config/Config.json:ro \
--v "$(pwd)"/.local-chromium:/app/.local-chromium  \
--it --privileged=true  nolanhzy/nvjdc:0.5 
-```
-
-10查看 日志 
-
-```
-docker logs -f nolanjdc 
-
-```
-
-  
-
-出现 NETJDC  started 即可 
+docker版本
+地址:https://github.com/NolanHzy/nvjdcdocker/blob/main/README.md
 
 
-
-## 更新
-
-删除容器
-```
-docker rm -f nolanjdc 
-```
-删除镜像
-```
-docker rmi -f nolanhzy/nvjdc:0.4
-```
-
-进入你以前下载过 浏览器 和JSON配置的文件夹中 
-如原来在 root 下 nolanjdc 文件夹中 下载的配置与浏览器
-```
-cd /root/nolanjdc 
-``` 
-然后重复后续步骤即可
 ## 注意事项
 
 容器启动后第一次获取验证码的时候可能卡住刷新一下即可
