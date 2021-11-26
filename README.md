@@ -1,21 +1,39 @@
 # nvjdc
 
+<<<<<<< HEAD
 ## 提示
 由于我自己的环境是centos x86，arm并未测试
+=======
 
+## 提示
+登陆上传CK还事这一部分没有变，滑块轨迹变了 轨迹我就不放出来了 容易凉
+>>>>>>> 5e8f5861856c85a9461f531871119e7ec392d8a9
 
-更新自动五次滑块
+由于我自己的环境是centos x86，arm不支持
+
 
 在Fork就跑路
 
-一个文档你们Fork啥啊，，
 ## 支持的架构
 ![image](https://user-images.githubusercontent.com/87279659/137679751-7c2e901f-0429-4c5c-a6d2-120b8848048f.png)
 查看地址:https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0-supported-os.md
 
 
 ## 安装教程
+<<<<<<< HEAD
 查看地址:https://github.com/NolanHzy/nvjdcdocker
+=======
+
+docker版本
+地址:https://github.com/NolanHzy/nvjdcdocker/blob/main/README.md
+
+
+## 注意事项
+
+容器启动后第一次获取验证码的时候可能卡住刷新一下即可
+
+
+>>>>>>> 5e8f5861856c85a9461f531871119e7ec392d8a9
 ## 最后
 觉得不错。回来帮我点个star
 ## 特别声明:
