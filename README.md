@@ -1,13 +1,12 @@
 # nvjdc
 
-<<<<<<< HEAD
+
 ## 提示
 由于我自己的环境是centos x86，arm并未测试
 =======
 
 ## 提示
 登陆上传CK还事这一部分没有变，滑块轨迹变了 轨迹我就不放出来了 容易凉
->>>>>>> 5e8f5861856c85a9461f531871119e7ec392d8a9
 
 由于我自己的环境是centos x86，arm不支持
 
@@ -20,9 +19,6 @@
 
 
 ## 安装教程
-<<<<<<< HEAD
-查看地址:https://github.com/NolanHzy/nvjdcdocker
-=======
 
 docker版本
 地址:https://github.com/NolanHzy/nvjdcdocker/blob/main/README.md
@@ -33,7 +29,6 @@ docker版本
 容器启动后第一次获取验证码的时候可能卡住刷新一下即可
 
 
->>>>>>> 5e8f5861856c85a9461f531871119e7ec392d8a9
 ## 最后
 觉得不错。回来帮我点个star
 ## 特别声明:
