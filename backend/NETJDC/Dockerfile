@@ -3,9 +3,10 @@
 #FROM mcr.microsoft.com/dotnet/aspnet:5.0 
 FROM mcr.microsoft.com/dotnet/sdk:5.0
 ENV DEBIAN_FRONTEND=noninteractive 
+
 ENV OPENCV_VERSION=4.5.3
 
-RUN apt-get update && apt-get install -y libx11-6 libx11-xcb1 libatk1.0-0 libgtk-3-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2 libxshmfence1 libnss3 libgdiplus libc6-dev
+RUN apt-get update && apt-get install -y libx11-6 libx11-xcb1 libatk1.0-0 libgtk-3-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2 libxshmfence1 libnss3 libgdiplus libc6-dev 
 RUN ln -s /usr/lib/libgdiplus.so /usr/lib/gdiplus.dll
 
 # Install opencv dependencies
@@ -106,10 +107,9 @@ RUN mkdir /opencvsharp/make && cd /opencvsharp/make && \
 
 ENV ASPNETCORE_URLS=http://+:80
 
-
-#ENV PUPPETEER_EXECUTABLE_PATH "/usr/bin/google-chrome"
+#ENV PUPPETEER_EXECUTABLE_PATH "/usr/bin/chromium-browser"
 #把当前目录复制到镜像的 app目录
-COPY . /app
+#COPY . /app
 #指定工作目录
 WORKDIR /app
 EXPOSE 80

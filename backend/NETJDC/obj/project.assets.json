@@ -169,6 +169,25 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
+      "Microsoft.Win32.Registry/5.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Security.AccessControl": "5.0.0",
+          "System.Security.Principal.Windows": "5.0.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/Microsoft.Win32.Registry.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Win32.Registry.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
       "Microsoft.Win32.SystemEvents/5.0.0": {
         "type": "package",
         "dependencies": {
@@ -269,42 +288,6 @@
           "lib/netcoreapp2.1/OpenCvSharp.dll": {}
         }
       },
-      "OpenCvSharp4.runtime.centos7-x64/4.0.0.20190129": {
-        "type": "package",
-        "runtimeTargets": {
-          "runtimes/centos7-x64/native/libOpenCvSharpExtern.so": {
-            "assetType": "native",
-            "rid": "centos7-x64"
-          }
-        }
-      },
-      "OpenCvSharp4.runtime.linux-arm/4.5.3.20210817": {
-        "type": "package",
-        "runtimeTargets": {
-          "runtimes/linux-arm/native/libOpenCvSharpExtern.so": {
-            "assetType": "native",
-            "rid": "linux-arm"
-          }
-        }
-      },
-      "OpenCvSharp4.runtime.linux-arm64.cuda/4.5.2.20210803": {
-        "type": "package",
-        "runtimeTargets": {
-          "runtimes/linux-arm64/native/libOpenCvSharpExtern.so": {
-            "assetType": "native",
-            "rid": "linux-arm64"
-          }
-        }
-      },
-      "OpenCvSharp4.runtime.ubuntu.18.04-x64/4.5.3.20210817": {
-        "type": "package",
-        "runtimeTargets": {
-          "runtimes/ubuntu.18.04-x64/native/libOpenCvSharpExtern.so": {
-            "assetType": "native",
-            "rid": "ubuntu.18.04-x64"
-          }
-        }
-      },
       "OpenCvSharp4.runtime.win/4.5.3.20210817": {
         "type": "package",
         "build": {
@@ -329,6 +312,26 @@
           }
         }
       },
+      "OpenCvSharp4.Windows/4.5.3.20210817": {
+        "type": "package",
+        "dependencies": {
+          "OpenCvSharp4": "4.5.3.20210817",
+          "OpenCvSharp4.WpfExtensions": "4.5.3.20210817",
+          "OpenCvSharp4.runtime.win": "4.5.3.20210817"
+        }
+      },
+      "OpenCvSharp4.WpfExtensions/4.5.3.20210817": {
+        "type": "package",
+        "dependencies": {
+          "OpenCvSharp4": "4.5.3.20210817"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/OpenCvSharp.WpfExtensions.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/OpenCvSharp.WpfExtensions.dll": {}
+        }
+      },
       "PuppeteerSharp/5.1.0": {
         "type": "package",
         "dependencies": {
@@ -345,6 +348,15 @@
         },
         "runtime": {
           "lib/netstandard2.0/PuppeteerSharp.dll": {}
+        }
+      },
+      "RestSharp/106.13.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/RestSharp.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/RestSharp.dll": {}
         }
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
@@ -546,6 +558,18 @@
         },
         "runtime": {
           "lib/netcoreapp2.0/_._": {}
+        }
+      },
+      "System.CodeDom/6.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/System.CodeDom.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.CodeDom.dll": {}
+        },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
       "System.Collections/4.3.0": {
@@ -961,6 +985,28 @@
           "lib/netstandard1.6/System.Linq.Expressions.dll": {}
         }
       },
+      "System.Management/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Win32.Registry": "5.0.0",
+          "System.CodeDom": "6.0.0"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/System.Management.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/System.Management.dll": {}
+        },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/netcoreapp3.1/System.Management.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
       "System.Memory/4.5.4": {
         "type": "package",
         "compile": {
@@ -1290,6 +1336,25 @@
           "lib/netstandard1.3/System.Runtime.Serialization.Primitives.dll": {}
         }
       },
+      "System.Security.AccessControl/5.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "5.0.0",
+          "System.Security.Principal.Windows": "5.0.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Security.AccessControl.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Security.AccessControl.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/netcoreapp2.0/System.Security.AccessControl.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
       "System.Security.Cryptography.Algorithms/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -1507,6 +1572,25 @@
           }
         }
       },
+      "System.Security.Principal.Windows/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netcoreapp3.0/System.Security.Principal.Windows.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Security.Principal.Windows.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/netcoreapp2.1/System.Security.Principal.Windows.dll": {
+            "assetType": "runtime",
+            "rid": "unix"
+          },
+          "runtimes/win/lib/netcoreapp2.1/System.Security.Principal.Windows.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
       "System.Text.Encoding/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -1678,17 +1762,25 @@
           "bin/placeholder/IServer.dll": {}
         }
       },
+      "PageMove/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/PageMove.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PageMove.dll": {}
+        }
+      },
       "Server/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
           "IServer": "1.0.0",
           "OpenCvSharp4": "4.5.3.20210817",
-          "OpenCvSharp4.runtime.centos7-x64": "4.0.0.20190129",
-          "OpenCvSharp4.runtime.linux-arm": "4.5.3.20210817",
-          "OpenCvSharp4.runtime.linux-arm64.cuda": "4.5.2.20210803",
-          "OpenCvSharp4.runtime.ubuntu.18.04-x64": "4.5.3.20210817",
+          "OpenCvSharp4.Windows": "4.5.3.20210817",
           "OpenCvSharp4.runtime.win": "4.5.3.20210817",
+          "PageMove": "1.0.0",
           "PuppeteerSharp": "5.1.0"
         },
         "compile": {
@@ -1701,6 +1793,10 @@
       "Systems/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "RestSharp": "106.13.0",
+          "System.Management": "6.0.0"
+        },
         "compile": {
           "bin/placeholder/Systems.dll": {}
         },
@@ -2064,6 +2160,50 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
+    "Microsoft.Win32.Registry/5.0.0": {
+      "sha512": "dDoKi0PnDz31yAyETfRntsLArTlVAVzUzCIvvEDsDsucrl33Dl8pIJG06ePTJTI3tGpeyHS9Cq7Foc/s4EeKcg==",
+      "type": "package",
+      "path": "microsoft.win32.registry/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net46/Microsoft.Win32.Registry.dll",
+        "lib/net461/Microsoft.Win32.Registry.dll",
+        "lib/net461/Microsoft.Win32.Registry.xml",
+        "lib/netstandard1.3/Microsoft.Win32.Registry.dll",
+        "lib/netstandard2.0/Microsoft.Win32.Registry.dll",
+        "lib/netstandard2.0/Microsoft.Win32.Registry.xml",
+        "microsoft.win32.registry.5.0.0.nupkg.sha512",
+        "microsoft.win32.registry.nuspec",
+        "ref/net46/Microsoft.Win32.Registry.dll",
+        "ref/net461/Microsoft.Win32.Registry.dll",
+        "ref/net461/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/Microsoft.Win32.Registry.dll",
+        "ref/netstandard1.3/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/de/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/es/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/fr/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/it/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/ja/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/ko/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/ru/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/zh-hans/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/zh-hant/Microsoft.Win32.Registry.xml",
+        "ref/netstandard2.0/Microsoft.Win32.Registry.dll",
+        "ref/netstandard2.0/Microsoft.Win32.Registry.xml",
+        "runtimes/win/lib/net46/Microsoft.Win32.Registry.dll",
+        "runtimes/win/lib/net461/Microsoft.Win32.Registry.dll",
+        "runtimes/win/lib/net461/Microsoft.Win32.Registry.xml",
+        "runtimes/win/lib/netstandard1.3/Microsoft.Win32.Registry.dll",
+        "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.dll",
+        "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.xml",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "Microsoft.Win32.SystemEvents/5.0.0": {
       "sha512": "Bh6blKG8VAKvXiLe2L+sEsn62nc1Ij34MrNxepD2OCrS5cpCwQa9MeLyhVQPQ/R4Wlzwuy6wMK8hLb11QPDRsQ==",
       "type": "package",
@@ -2161,55 +2301,6 @@
         "opencvsharp4.nuspec"
       ]
     },
-    "OpenCvSharp4.runtime.centos7-x64/4.0.0.20190129": {
-      "sha512": "mcqC8t4A7BUFnHLWuEWlnpwQoxS3rA3ZBxLGM4wRoibKzEJAnh4MNh98f37jxehTQ2H4VrudR+g0KgDlvSWLrw==",
-      "type": "package",
-      "path": "opencvsharp4.runtime.centos7-x64/4.0.0.20190129",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "opencvsharp4.runtime.centos7-x64.4.0.0.20190129.nupkg.sha512",
-        "opencvsharp4.runtime.centos7-x64.nuspec",
-        "runtimes/centos7-x64/native/libOpenCvSharpExtern.so"
-      ]
-    },
-    "OpenCvSharp4.runtime.linux-arm/4.5.3.20210817": {
-      "sha512": "0bjrVzL+i90IlugLAlIOCCkZ9yr6N+6sgrIAeNzs4jRvUCTmDOH8Fex5FDNuIcFhH9WES198s4EbvNC88g8cMQ==",
-      "type": "package",
-      "path": "opencvsharp4.runtime.linux-arm/4.5.3.20210817",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "opencvsharp4.runtime.linux-arm.4.5.3.20210817.nupkg.sha512",
-        "opencvsharp4.runtime.linux-arm.nuspec",
-        "runtimes/linux-arm/native/libOpenCvSharpExtern.so"
-      ]
-    },
-    "OpenCvSharp4.runtime.linux-arm64.cuda/4.5.2.20210803": {
-      "sha512": "rvHHdr8nHIk6gvR80UErqlAjvfj5hgyklbIXHEM1WsCWC5v227cIO1oehIM4ZONihYV0ERtdsBloC5Jz2xLU4A==",
-      "type": "package",
-      "path": "opencvsharp4.runtime.linux-arm64.cuda/4.5.2.20210803",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "nuget.exe",
-        "opencvsharp4.runtime.linux-arm64.cuda.4.5.2.20210803.nupkg.sha512",
-        "opencvsharp4.runtime.linux-arm64.cuda.nuspec",
-        "runtimes/linux-arm64/native/libOpenCvSharpExtern.so"
-      ]
-    },
-    "OpenCvSharp4.runtime.ubuntu.18.04-x64/4.5.3.20210817": {
-      "sha512": "bi4eoTHCyJ21Y/2pVGItWYT3Fd3S//VAhGK3YrVNsWYeViOLr0hjyL//EQ1kDeXml8yhH6Fj06o6O1zwJYzWAQ==",
-      "type": "package",
-      "path": "opencvsharp4.runtime.ubuntu.18.04-x64/4.5.3.20210817",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "opencvsharp4.runtime.ubuntu.18.04-x64.4.5.3.20210817.nupkg.sha512",
-        "opencvsharp4.runtime.ubuntu.18.04-x64.nuspec",
-        "runtimes/ubuntu.18.04-x64/native/libOpenCvSharpExtern.so"
-      ]
-    },
     "OpenCvSharp4.runtime.win/4.5.3.20210817": {
       "sha512": "q2PknNPPAJHjVEsrgdHtWVHzZsNlANnkj2SCw4DC/x8qeAX+Skp93KPLVoELNyU415P7RyjDHn7CGLSpNpltyQ==",
       "type": "package",
@@ -2228,6 +2319,32 @@
         "runtimes/win-x86/native/opencv_videoio_ffmpeg453.dll"
       ]
     },
+    "OpenCvSharp4.Windows/4.5.3.20210817": {
+      "sha512": "zCPiZmcQaYnZSInZNNXg3ppyZb9DvaZgKTgEt4yi/sLctEWxW3g4UKOdEOqjbpJzL2kSh//wkOYwtm2xjvKTfw==",
+      "type": "package",
+      "path": "opencvsharp4.windows/4.5.3.20210817",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "opencvsharp4.windows.4.5.3.20210817.nupkg.sha512",
+        "opencvsharp4.windows.nuspec"
+      ]
+    },
+    "OpenCvSharp4.WpfExtensions/4.5.3.20210817": {
+      "sha512": "dutuhSGpZ/NrZT4bjuO5Jb5XnQfYdjrOcXtVGYc7RaEwXEmfCEPaAckmnZT8RXW2lM8KJaznSs3Arw+Ud4L2gA==",
+      "type": "package",
+      "path": "opencvsharp4.wpfextensions/4.5.3.20210817",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net461/OpenCvSharp.WpfExtensions.dll",
+        "lib/net461/OpenCvSharp.WpfExtensions.xml",
+        "lib/netcoreapp3.1/OpenCvSharp.WpfExtensions.dll",
+        "lib/netcoreapp3.1/OpenCvSharp.WpfExtensions.xml",
+        "opencvsharp4.wpfextensions.4.5.3.20210817.nupkg.sha512",
+        "opencvsharp4.wpfextensions.nuspec"
+      ]
+    },
     "PuppeteerSharp/5.1.0": {
       "sha512": "6xGcgwjmcZg+tLB/Z+4EqTnKMnqMQgLxbw3vzUls/QRhUeqcd9Qk9quOLi82m0y7U6uV+7Zm4T6V/vP7CoWiXg==",
       "type": "package",
@@ -2239,6 +2356,22 @@
         "lib/netstandard2.0/PuppeteerSharp.xml",
         "puppeteersharp.5.1.0.nupkg.sha512",
         "puppeteersharp.nuspec"
+      ]
+    },
+    "RestSharp/106.13.0": {
+      "sha512": "vwUdmmtC5vtePeNfBWnFcixBF2KjUeVv3ss4ZFzCIkOf7NB7W/9qX8JNZD9DOrz2yGk4AJW8k9znwgPZhnoiNg==",
+      "type": "package",
+      "path": "restsharp/106.13.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net452/RestSharp.dll",
+        "lib/net452/RestSharp.xml",
+        "lib/netstandard2.0/RestSharp.dll",
+        "lib/netstandard2.0/RestSharp.xml",
+        "restsharp.106.13.0.nupkg.sha512",
+        "restsharp.nuspec",
+        "restsharp.png"
       ]
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
@@ -2559,6 +2692,29 @@
         "system.buffers.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "System.CodeDom/6.0.0": {
+      "sha512": "CPc6tWO1LAer3IzfZufDBRL+UZQcj5uS207NHALQzP84Vp/z6wF0Aa0YZImOQY8iStY0A2zI/e3ihKNPfUm8XA==",
+      "type": "package",
+      "path": "system.codedom/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/System.CodeDom.targets",
+        "buildTransitive/netcoreapp3.1/_._",
+        "lib/net461/System.CodeDom.dll",
+        "lib/net461/System.CodeDom.xml",
+        "lib/net6.0/System.CodeDom.dll",
+        "lib/net6.0/System.CodeDom.xml",
+        "lib/netstandard2.0/System.CodeDom.dll",
+        "lib/netstandard2.0/System.CodeDom.xml",
+        "system.codedom.6.0.0.nupkg.sha512",
+        "system.codedom.nuspec",
+        "useSharedDesignerContext.txt"
       ]
     },
     "System.Collections/4.3.0": {
@@ -3864,6 +4020,34 @@
         "system.linq.expressions.nuspec"
       ]
     },
+    "System.Management/6.0.0": {
+      "sha512": "sHsESYMmPDhQuOC66h6AEOs/XowzKsbT9srMbX71TCXP58hkpn1BqBjdmKj1+DCA/WlBETX1K5WjQHwmV0Txrg==",
+      "type": "package",
+      "path": "system.management/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/System.Management.targets",
+        "buildTransitive/netcoreapp3.1/_._",
+        "lib/net461/_._",
+        "lib/net6.0/System.Management.dll",
+        "lib/net6.0/System.Management.xml",
+        "lib/netcoreapp3.1/System.Management.dll",
+        "lib/netcoreapp3.1/System.Management.xml",
+        "lib/netstandard2.0/System.Management.dll",
+        "lib/netstandard2.0/System.Management.xml",
+        "runtimes/win/lib/net6.0/System.Management.dll",
+        "runtimes/win/lib/net6.0/System.Management.xml",
+        "runtimes/win/lib/netcoreapp3.1/System.Management.dll",
+        "runtimes/win/lib/netcoreapp3.1/System.Management.xml",
+        "system.management.6.0.0.nupkg.sha512",
+        "system.management.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
     "System.Memory/4.5.4": {
       "sha512": "1MbJTHS1lZ4bS4FmsJjnuGJOu88ZzTT2rLvrhW7Ygic+pC0NWA+3hgAen0HRdsocuQXCkUTdFn9yHJJhsijDXw==",
       "type": "package",
@@ -5066,6 +5250,53 @@
         "system.runtime.serialization.primitives.nuspec"
       ]
     },
+    "System.Security.AccessControl/5.0.0": {
+      "sha512": "dagJ1mHZO3Ani8GH0PHpPEe/oYO+rVdbQjvjJkBRNQkX4t0r1iaeGn8+/ybkSLEan3/slM0t59SVdHzuHf2jmw==",
+      "type": "package",
+      "path": "system.security.accesscontrol/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net46/System.Security.AccessControl.dll",
+        "lib/net461/System.Security.AccessControl.dll",
+        "lib/net461/System.Security.AccessControl.xml",
+        "lib/netstandard1.3/System.Security.AccessControl.dll",
+        "lib/netstandard2.0/System.Security.AccessControl.dll",
+        "lib/netstandard2.0/System.Security.AccessControl.xml",
+        "lib/uap10.0.16299/_._",
+        "ref/net46/System.Security.AccessControl.dll",
+        "ref/net461/System.Security.AccessControl.dll",
+        "ref/net461/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/System.Security.AccessControl.dll",
+        "ref/netstandard1.3/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/de/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/es/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/fr/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/it/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/ja/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/ko/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/ru/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/zh-hans/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/zh-hant/System.Security.AccessControl.xml",
+        "ref/netstandard2.0/System.Security.AccessControl.dll",
+        "ref/netstandard2.0/System.Security.AccessControl.xml",
+        "ref/uap10.0.16299/_._",
+        "runtimes/win/lib/net46/System.Security.AccessControl.dll",
+        "runtimes/win/lib/net461/System.Security.AccessControl.dll",
+        "runtimes/win/lib/net461/System.Security.AccessControl.xml",
+        "runtimes/win/lib/netcoreapp2.0/System.Security.AccessControl.dll",
+        "runtimes/win/lib/netcoreapp2.0/System.Security.AccessControl.xml",
+        "runtimes/win/lib/netstandard1.3/System.Security.AccessControl.dll",
+        "runtimes/win/lib/uap10.0.16299/_._",
+        "system.security.accesscontrol.5.0.0.nupkg.sha512",
+        "system.security.accesscontrol.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "System.Security.Cryptography.Algorithms/4.3.0": {
       "sha512": "W1kd2Y8mYSCgc3ULTAZ0hOP2dSdG5YauTb1089T0/kRcN2MpSAW1izOFROrJgxSlMn3ArsgHXagigyi+ibhevg==",
       "type": "package",
@@ -5303,6 +5534,61 @@
         "runtimes/win/lib/netstandard1.6/System.Security.Cryptography.X509Certificates.dll",
         "system.security.cryptography.x509certificates.4.3.0.nupkg.sha512",
         "system.security.cryptography.x509certificates.nuspec"
+      ]
+    },
+    "System.Security.Principal.Windows/5.0.0": {
+      "sha512": "t0MGLukB5WAVU9bO3MGzvlGnyJPgUlcwerXn1kzBRjwLKixT96XV0Uza41W49gVd8zEMFu9vQEFlv0IOrytICA==",
+      "type": "package",
+      "path": "system.security.principal.windows/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net46/System.Security.Principal.Windows.dll",
+        "lib/net461/System.Security.Principal.Windows.dll",
+        "lib/net461/System.Security.Principal.Windows.xml",
+        "lib/netstandard1.3/System.Security.Principal.Windows.dll",
+        "lib/netstandard2.0/System.Security.Principal.Windows.dll",
+        "lib/netstandard2.0/System.Security.Principal.Windows.xml",
+        "lib/uap10.0.16299/_._",
+        "ref/net46/System.Security.Principal.Windows.dll",
+        "ref/net461/System.Security.Principal.Windows.dll",
+        "ref/net461/System.Security.Principal.Windows.xml",
+        "ref/netcoreapp3.0/System.Security.Principal.Windows.dll",
+        "ref/netcoreapp3.0/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/System.Security.Principal.Windows.dll",
+        "ref/netstandard1.3/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/de/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/es/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/fr/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/it/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/ja/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/ko/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/ru/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/zh-hans/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/zh-hant/System.Security.Principal.Windows.xml",
+        "ref/netstandard2.0/System.Security.Principal.Windows.dll",
+        "ref/netstandard2.0/System.Security.Principal.Windows.xml",
+        "ref/uap10.0.16299/_._",
+        "runtimes/unix/lib/netcoreapp2.0/System.Security.Principal.Windows.dll",
+        "runtimes/unix/lib/netcoreapp2.0/System.Security.Principal.Windows.xml",
+        "runtimes/unix/lib/netcoreapp2.1/System.Security.Principal.Windows.dll",
+        "runtimes/unix/lib/netcoreapp2.1/System.Security.Principal.Windows.xml",
+        "runtimes/win/lib/net46/System.Security.Principal.Windows.dll",
+        "runtimes/win/lib/net461/System.Security.Principal.Windows.dll",
+        "runtimes/win/lib/net461/System.Security.Principal.Windows.xml",
+        "runtimes/win/lib/netcoreapp2.0/System.Security.Principal.Windows.dll",
+        "runtimes/win/lib/netcoreapp2.0/System.Security.Principal.Windows.xml",
+        "runtimes/win/lib/netcoreapp2.1/System.Security.Principal.Windows.dll",
+        "runtimes/win/lib/netcoreapp2.1/System.Security.Principal.Windows.xml",
+        "runtimes/win/lib/netstandard1.3/System.Security.Principal.Windows.dll",
+        "runtimes/win/lib/uap10.0.16299/_._",
+        "system.security.principal.windows.5.0.0.nupkg.sha512",
+        "system.security.principal.windows.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.Text.Encoding/4.3.0": {
@@ -5951,6 +6237,11 @@
       "path": "../IServer/IServer.csproj",
       "msbuildProject": "../IServer/IServer.csproj"
     },
+    "PageMove/1.0.0": {
+      "type": "project",
+      "path": "../PageMove/PageMove.csproj",
+      "msbuildProject": "../PageMove/PageMove.csproj"
+    },
     "Server/1.0.0": {
       "type": "project",
       "path": "../Server/Server.csproj",
@@ -5979,11 +6270,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\nvjdc\\backend\\NETJDC\\NETJDC.csproj",
+      "projectUniqueName": "E:\\03工作源码\\NETJDC\\NETJDC\\NETJDC.csproj",
       "projectName": "NETJDC",
-      "projectPath": "E:\\nvjdc\\backend\\NETJDC\\NETJDC.csproj",
+      "projectPath": "E:\\03工作源码\\NETJDC\\NETJDC\\NETJDC.csproj",
       "packagesPath": "D:\\Nuget\\Package",
-      "outputPath": "E:\\nvjdc\\backend\\NETJDC\\obj\\",
+      "outputPath": "E:\\03工作源码\\NETJDC\\NETJDC\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -6005,14 +6296,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "E:\\nvjdc\\backend\\IServer\\IServer.csproj": {
-              "projectPath": "E:\\nvjdc\\backend\\IServer\\IServer.csproj"
+            "E:\\03工作源码\\NETJDC\\IServer\\IServer.csproj": {
+              "projectPath": "E:\\03工作源码\\NETJDC\\IServer\\IServer.csproj"
             },
-            "E:\\nvjdc\\backend\\Server\\Server.csproj": {
-              "projectPath": "E:\\nvjdc\\backend\\Server\\Server.csproj"
+            "E:\\03工作源码\\NETJDC\\Server\\Server.csproj": {
+              "projectPath": "E:\\03工作源码\\NETJDC\\Server\\Server.csproj"
             },
-            "E:\\nvjdc\\backend\\Systems\\Systems.csproj": {
-              "projectPath": "E:\\nvjdc\\backend\\Systems\\Systems.csproj"
+            "E:\\03工作源码\\NETJDC\\Systems\\Systems.csproj": {
+              "projectPath": "E:\\03工作源码\\NETJDC\\Systems\\Systems.csproj"
             }
           }
         }

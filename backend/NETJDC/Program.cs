@@ -14,20 +14,7 @@ namespace NETJDC
         public static void Main(string[] args)
         {
 
-            Console.WriteLine(@"                           ");
-            Console.WriteLine(@"       ___  ________  ________");
-            Console.WriteLine(@"      |\  \|\   ___ \|\   ____\");
-            Console.WriteLine(@"      \ \  \ \  \ |\ \ \  \___ |");
-            Console.WriteLine(@"    __ \ \  \ \  \ \\ \ \  \      ");
-            Console.WriteLine(@"   |\  \\_\  \ \  \_\\ \ \  \____  ");
-            Console.WriteLine(@"   \ \________\ \_______\ \_______\ ");
-            Console.WriteLine(@"    \| ________|\| ______|\| ______|");
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine(@"                           By Nolan  ");
-            Console.WriteLine("");
-            Console.WriteLine("");
-
+           
             
             CreateHostBuilder(args).Build().Run();
         }

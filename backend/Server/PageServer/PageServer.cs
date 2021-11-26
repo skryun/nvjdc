@@ -5,14 +5,18 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
 using IServer;
 using IServer.IPageServer;
 using Newtonsoft.Json.Linq;
 using PuppeteerSharp;
 using PuppeteerSharp.Mobile;
+using RestSharp;
+using RestSharp.Extensions;
 using Systems;
 
 namespace Server.PageServer
@@ -101,6 +105,122 @@ namespace Server.PageServer
 
             }
         }
+        public void info()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(@"                                                                   ");
+            Console.WriteLine(@"                 ,--.                     ,---._                           ");
+            Console.WriteLine(@"               ,--.'|                   .-- -.' \     ,---,      ,----..   ");
+            Console.WriteLine(@"           ,--,:  : |       ,---.       |    |   :  .'  .' `\   /   /   \  ");
+            Console.WriteLine(@"        ,`--.'`|  ' :      /__./|       :    ;   |,---.'     \ |   :     : ");
+            Console.WriteLine(@"        |   :  :  | | ,---.;  ; |       :        ||   |  .`\  |.   |  ;. / ");
+            Console.WriteLine(@"        :   |   \ | :/___/ \  | |       |    :   ::   : |  '  |.   ; /--`  ");
+            Console.WriteLine(@"        |   : '  '; |\   ;  \ ' |       :         |   ' '  ;  :;   | ;     ");
+            Console.WriteLine(@"        '   ' ;.    ; \   \  \: |       |    ;   |'   | ;  .  ||   : |     ");
+            Console.WriteLine(@"        |   | | \   |  ;   \  ' .   ___ l         |   | :  |  '.   | '___  ");
+            Console.WriteLine(@"        '   : |  ; .'   \   \   ' /    /\    J   :'   : | /  ; '   ; : .'| ");
+            Console.WriteLine(@"        |   | '`--'      \   `  ;/  ../  `..-    ,|   | '` ,/  '   | '/  : ");
+            Console.WriteLine(@"        '   : |           :   \ |\    \         ; ;   :  .'    |   :    /  ");
+            Console.WriteLine(@"        ;   |.'            '---'' \    \       ,' |   ,.'      \   \ .'   ");
+            Console.WriteLine(@"        '---'                      '-- - ....--'  '-- '         `---`     ");
+            Console.WriteLine(@"");
+            Console.WriteLine(@"");
+            Console.WriteLine(@"                                                                     Version:" + _mainConfig.Version);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine(@"                                                                     By Nolan  ");
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("-------------------------------------------------------------------------------------");
+            Console.WriteLine("");
+            Console.WriteLine("序列号:" + _mainConfig.CPUID);
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                Console.WriteLine("Running on Linux!");
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                Console.WriteLine("Running on macOS!");
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                Console.WriteLine("Running on Windows!");
+            Console.WriteLine($"系统架构：{RuntimeInformation.OSArchitecture}");
+            Console.WriteLine($"系统名称：{RuntimeInformation.OSDescription}");
+            Console.WriteLine($"进程架构：{RuntimeInformation.ProcessArchitecture}");
+            Console.WriteLine($"是否64位操作系统：{Environment.Is64BitOperatingSystem}");
+            Console.WriteLine("-------------------------------------------------------------------------------------");
+        }
+        public async Task<bool> CCHECK()
+        {
+            var type = Enum.GetName(typeof(UpTypeEum), _mainConfig.UPTYPE);
+            Console.WriteLine("上传模式：" + type);
+            Console.WriteLine("回收时间：" + _mainConfig.Closetime + "分钟");
+            Console.WriteLine("自动滑块：" + _mainConfig.AutoCaptchaCount);
+            if (!string.IsNullOrEmpty(_mainConfig.PUSH_PLUS_TOKEN) && !string.IsNullOrEmpty(_mainConfig.PUSH_PLUS_USER)) Console.WriteLine("开启PUSH_PLU 上线推送服务");
+            if (!string.IsNullOrEmpty(_mainConfig.Debug)) Console.WriteLine("Debug 模式");
+            if (_mainConfig.Config.Count > 0 && !string.IsNullOrEmpty(_mainConfig.XDDToken))
+            {
+                Console.WriteLine("配置有误配置了XDD 有配置了青龙，请将青龙配置删除 如 Config:[]");
+            }
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("浏览器自检");
+            Console.WriteLine("-------------------------------------------------------------------------------------");
+            try
+            {
+                
+                //  if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)&& RuntimeInformation.OSArchitecture.)
+                var options = new LaunchOptions
+                {
+                    Args = new string[] { "--no-sandbox", "--disable-setuid-sandbox" },
+                    //Headless = false,
+                    DefaultViewport = new ViewPortOptions
+                    {
+                        Width = 375,
+                        Height = 667,
+                        IsMobile = true
+                    }
+
+                };
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && RuntimeInformation.OSArchitecture == Architecture.Arm || RuntimeInformation.OSArchitecture == Architecture.Arm64)
+                {
+                    Console.WriteLine("不支持arm！！！！！！！");
+                }
+                using (var browser = await Puppeteer.LaunchAsync(options))
+                using (var page = await browser.NewPageAsync())
+                {
+                    //设置手机模式
+                    DeviceDescriptor deviceOptions = Puppeteer.Devices.GetValueOrDefault(DeviceDescriptorName.IPhone7);
+                    await page.EmulateAsync(deviceOptions);
+                    //await page.SetUserAgentAsync("Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1");
+                    string Url = "https://plogin.m.jd.com/login/login?appid=300&returnurl=https%3A%2F%2Fwq.jd.com%2Fpassport%2FLoginRedirect%3Fstate%3D2087738584%26returnurl%3Dhttps%253A%252F%252Fhome.m.jd.com%252FmyJd%252Fnewhome.action%253Fsceneval%253D2%2526ufc%253D%2526&source=wq_passport";
+                    await page.GoToAsync(Url, 0, null);
+
+                    await page.WaitForTimeoutAsync(2000);
+                    await Waitopen(page);
+                    string js = "document.body.outerText";
+                    var pageouterText = await page.EvaluateExpressionAsync(js);
+                    var pagetext = pageouterText.ToString();
+                    pagetext = pagetext.Replace("\n", "");
+                    pagetext = pagetext.Replace("\r", "");
+                    Console.WriteLine("页面文字" + pagetext);
+                    Console.WriteLine("关闭页面");
+                    await page.CloseAsync();
+                    await page.DisposeAsync();
+                    await browser.CloseAsync();
+                    await browser.DisposeAsync();
+                    Console.WriteLine("浏览器关闭");
+                    Console.WriteLine("浏览器自检成功");
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("打开浏览器失败");
+                Console.WriteLine(e.Message);
+            }
+
+            Console.WriteLine("-------------------------------------------------------------------------------------");
+            return true;
+        }
+
         public async Task<bool> BrowserInit()
         {
             var browserFetcher = new BrowserFetcher();
@@ -136,7 +256,7 @@ namespace Server.PageServer
             string result = process.StandardOutput.ReadToEnd();
             process.WaitForExit();
         }
-        public async Task<ResultModel<object>> OpenJDTab(int qlkey, string Phone,bool UploadQL=true)
+        public async Task<ResultModel<object>> OpenJDTab(int qlkey, string Phone, bool UploadQL = true)
         {
             DateTime expdate = DateTime.Now;
 
@@ -151,7 +271,7 @@ namespace Server.PageServer
                     return result;
                 }
             }
-           
+
             Page page = GetPage();
             Browser browser = null;
             if (page == null)
@@ -160,7 +280,7 @@ namespace Server.PageServer
                 var options = new LaunchOptions
                 {
                     Args = new string[] { "--no-sandbox", "--disable-setuid-sandbox" },
-                    Headless = true,
+                    //Headless = false,
                     DefaultViewport = new ViewPortOptions
                     {
                         Width = 375,
@@ -169,6 +289,11 @@ namespace Server.PageServer
                     }
 
                 };
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && RuntimeInformation.OSArchitecture == Architecture.Arm || RuntimeInformation.OSArchitecture == Architecture.Arm64)
+                {
+                    Console.WriteLine("不支持arm！！！！！！！");
+                }
+               
                 browser = await Puppeteer.LaunchAsync(options);
             }
             else
@@ -192,21 +317,20 @@ namespace Server.PageServer
              //await page.EvaluateFunctionOnNewDocumentAsync("function(){Object.defineProperty(navigator, 'webdriver', {get: () => undefined})}");
             DeviceDescriptor deviceOptions = Puppeteer.Devices.GetValueOrDefault(DeviceDescriptorName.IPhone7);
             await page.EmulateAsync(deviceOptions);
-            await page.GoToAsync(Url);
+            await page.GoToAsync(Url, 0, null);
             await page.WaitForTimeoutAsync(200);
-            var aa = await GetPhoneCode(Phone, page);
-            //Console.WriteLine(aa);
-            await page.WaitForTimeoutAsync(210);
-            //await page.ClickAsync("button[report-eventid='MLoginRegister_SMSReceiveCode']");
-            //await page.ClickAsync("button[report-eventid='MLoginRegister_SMSReceiveCode']");
-            await page.ClickAsync("button[report-eventid='MLoginRegister_SMSReceiveCode']", new PuppeteerSharp.Input.ClickOptions { ClickCount = 3 });
+            await Waitopen(page);
             await page.ClickAsync("input[type=checkbox]");
+            var aa = await GetPhoneCode(Phone, page);
+            await page.WaitForTimeoutAsync(210);
+            await page.ClickAsync("button[report-eventid='MLoginRegister_SMSReceiveCode']", new PuppeteerSharp.Input.ClickOptions { ClickCount = 3 });
+
             ///傻逼等待代码
             await WaitSendSms(page);
             string js = "document.body.outerText";
             var pageouterText = await page.EvaluateExpressionAsync(js);
             var pagetext = pageouterText.ToString();
-            //Console.WriteLine(pagetext);
+            DebugLOG("SendSms 发送验证码或安全滑块", pagetext);
             var ckcount = 0;
             var tabcount = GetTableCount();
             if (_mainConfig.UPTYPE == UpTypeEum.ql)
@@ -214,29 +338,31 @@ namespace Server.PageServer
                 var data = await getCount(qlkey);
                 ckcount = data.ckcount;
             }
-           
-            System.Timers.Timer timer = new System.Timers.Timer(60000 * 3);
+            int closetime = int.Parse(_mainConfig.Closetime);
+            System.Timers.Timer timer = new System.Timers.Timer(60000 * closetime);
             timer.Elapsed += new System.Timers.ElapsedEventHandler(async (s, e) =>
             {
                 Console.WriteLine("    手机：" + Phone + " tabe 自动回收 时间:" + DateTime.Now.ToString());
                 Delpage(Phone, page);
                 await page.CloseAsync();
+                await page.DisposeAsync();
                 var oldpage = GetPage();
                 if (oldpage == null)
                 {
                     await browser.CloseAsync();
+                    await browser.DisposeAsync();
                 }
                 timer.Dispose();
             });
             timer.AutoReset = false;
 
-            if (pagetext.Contains("安全验证") && !pagetext.Contains("验证成功"))
+            if (pagetext.Contains("拖动滑块填充拼图"))
             {
                 Console.WriteLine("    手机：" + Phone + " tabe 创建 时间:" + DateTime.Now.ToString());
                 timer.Start();
                 Console.WriteLine(Phone + "安全验证");
-                // await PageClose(Phone);
-                result.data = new { Status = 666, ckcount = ckcount, tabcount = tabcount };
+                var baseimg = await GetIMG(page, 0);
+                result.data = new { Status = 666, ckcount = ckcount, tabcount = tabcount, big = baseimg.big, small = baseimg.small };
                 result.message = "出现安全验证,";
                 return result;
             }
@@ -252,6 +378,13 @@ namespace Server.PageServer
                 await PageClose(Phone);
                 result.data = new { Status = 505, pagetext = pagetext };
                 result.message = "对不起，短信验证码发送次数已达上限，请24小时后再试。";
+                return result;
+            }
+            if (pagetext.Contains("您的账号存在风险"))
+            {
+                await PageClose(Phone);
+                result.data = new { Status = 505, pagetext = pagetext };
+                result.message = "您的" + Phone + "存在风险";
                 return result;
             }
             if (pagetext.Contains("该手机号未注册，将为您直接注册。"))
@@ -274,6 +407,32 @@ namespace Server.PageServer
 
             return result;
         }
+        public async Task<bool> Waitopen(Page page)
+        {
+            try
+            {
+                await page.WaitForTimeoutAsync(500);
+                string js = "document.body.outerText";
+                var pageouterText = await page.EvaluateExpressionAsync(js);
+                var pagetext = pageouterText.ToString();
+                DebugLOG("Waitopen 等待打开网页", pagetext);
+                if (pagetext.Contains("获取验证码"))
+                {
+                    return true;
+                }
+                else
+                {
+
+                    return await WaitSendSms(page);
+                }
+            }
+            catch (Exception e)
+            {
+                return await Waitopen(page);
+            }
+
+
+        }
         /// <summary>
         /// 网络问题所以要写这种傻逼等待带代码
         /// </summary>
@@ -285,7 +444,8 @@ namespace Server.PageServer
             string js = "document.body.outerText";
             var pageouterText = await page.EvaluateExpressionAsync(js);
             var pagetext = pageouterText.ToString();
-            if (pagetext.Contains("安全验证") || pagetext.Contains("短信已经发送，请勿重复提交") || pagetext.Contains("短信验证码发送次数已达上限") || pagetext.Contains("该手机号未注册，将为您直接注册。") || pagetext.Contains("重新获取"))
+            DebugLOG("WaitSendSms 等待是否发送验证码或安全滑块", pagetext);
+            if (pagetext.Contains("安全验证") || pagetext.Contains("短信已经发送，请勿重复提交") || pagetext.Contains("您的账号存在风险") || pagetext.Contains("该手机号未注册，将为您直接注册。") || pagetext.Contains("重新获取"))
             {
                 return true;
             }
@@ -302,10 +462,12 @@ namespace Server.PageServer
                 Delpage(Phone, page);
                 var browser = page.Browser;
                 await page.CloseAsync();
+                await page.DisposeAsync();
                 var oldpage = GetPage();
                 if (oldpage == null)
                 {
                     await browser.CloseAsync();
+                    await browser.DisposeAsync();
                 }
             }
         }
@@ -330,8 +492,9 @@ namespace Server.PageServer
                 string js = "document.body.outerText";
                 var pageouterText = await page.EvaluateExpressionAsync(js);
                 var pagetext = pageouterText.ToString();
-              
-                if (pagetext.Contains("验证码输入错误") || pagetext.Contains("验证码错误多次，请重新获取") || pagetext.Contains("该手机号未注册，将为您直接注册。") || pagetext.Contains("打开京东App，购物更轻松"))
+                DebugLOG("AwitVerifyCode 等待判断登陆", pagetext);
+                //   
+                if (pagetext.Contains("验证码输入错误") || pagetext.Contains("验证码错误多次") || pagetext.Contains("该手机号未注册") || pagetext.Contains("该手机号为运营商二次贩卖号") || pagetext.Contains("立即打开"))
                 {
                     return true;
                 }
@@ -347,7 +510,7 @@ namespace Server.PageServer
 
         }
 
-        public async Task<ResultModel<object>> VerifyCode(int qlkey,string qq, string Phone, string Code)
+        public async Task<ResultModel<object>> VerifyCode(int qlkey, string qq, string Phone, string Code)
         {
 
             ResultModel<object> result = ResultModel<object>.Create(false, "");
@@ -361,39 +524,39 @@ namespace Server.PageServer
                     return result;
                 }
             }
-           
+
 
             Page page = GetPage(Phone);
             if (page == null)
             {
-                result.message = "未找到当前号码的网页请稍候再试,或者网页超过3分钟已被回收";
+                result.message = "未找到当前号码的网页请稍候再试,或者网页超过" + _mainConfig.Closetime + "分钟已被回收";
                 result.data = new { Status = 404 };
                 return result;
             }
             await SetCode(Code, page);
             //await page.WaitForTimeoutAsync(400);
             Console.WriteLine("输入验证码" + Code);
-          
+
             await page.ClickAsync("a[report-eventid='MLoginRegister_SMSLogin']");
             await AwitVerifyCode(page);
 
             string js = "document.body.outerText";
             var pageouterText = await page.EvaluateExpressionAsync(js);
             var pagetext = pageouterText.ToString();
-            // Console.WriteLine(pagetext.ToString());
+            DebugLOG("VerifyCode 判断登陆", pagetext);
             if (pagetext.Contains("验证码输入错误"))
             {
                 result.message = "验证码输入错误";
                 return result;
             }
-            if (pagetext.Contains("验证码错误多次，请重新获取"))
+            if (pagetext.Contains("验证码错误多次"))
             {
                 await PageClose(Phone);
                 result.data = new { Status = 501 };
                 result.message = "验证码错误多次,请过三分钟之后再来。";
                 return result;
             }
-            if (pagetext.Contains("该手机号未注册，将为您直接注册。"))
+            if (pagetext.Contains("该手机号未注册"))
             {
                 await PageClose(Phone);
 
@@ -401,19 +564,27 @@ namespace Server.PageServer
                 result.message = "该手机号未注册";
                 return result;
             }
-            if (pagetext.Contains("打开京东App，购物更轻松"))
+            if (pagetext.Contains("该手机号为运营商二次贩卖号"))
+            {
+                await PageClose(Phone);
+
+                result.data = new { Status = 501 };
+                result.message = "该手机号存在安全风险，请在JD自行登录看提示";
+                return result;
+            }
+            if (pagetext.Contains("立即打开"))
             {
                 var cookies = await page.GetCookiesAsync();
                 var CKkey = cookies.FirstOrDefault(x => x.Name == "pt_key");
                 var CKpin = cookies.FirstOrDefault(x => x.Name == "pt_pin");
+                await PageClose(Phone);
                 if (CKkey == null || CKpin == null)
                 {
-                    await PageClose(Phone);
                     result.message = "获取Cookie失败，请重试";
                     result.data = new { Status = 404 };
                     return result;
                 }
-                
+
                 var CCookie = CKkey.Name + "=" + CKkey.Value + ";" + CKpin.Name + "=" + CKpin.Value + ";";
                 await PageClose(Phone);
                 Console.WriteLine(Phone + "获取到ck");
@@ -430,8 +601,10 @@ namespace Server.PageServer
                 int tabcount = GetTableCount();
                 result.data = new { tabcount = tabcount };
                 result.success = true;
-                result.data = new { tabcount = tabcount,ck=CCookie };
+                result.data = new { tabcount = tabcount, ck = CCookie };
+                return result;
             }
+            await PageClose(Phone);
             result.message = "登陆失败,请刷新页面";
             return result;
 
@@ -442,7 +615,7 @@ namespace Server.PageServer
         {
             //"code":200,"data":"null","message":"添加成功"
             ResultModel<object> result = ResultModel<object>.Create(false, "");
-         
+
             using (HttpClient client = new HttpClient())
             {
                 Dictionary<string, string> dict = new Dictionary<string, string>
@@ -452,9 +625,9 @@ namespace Server.PageServer
                          {"ck", ck}
                     };
 
-                var resultd =await client.PostAsync(_mainConfig.XDDurl, new FormUrlEncodedContent(dict));
+                var resultd = await client.PostAsync(_mainConfig.XDDurl, new FormUrlEncodedContent(dict));
                 string resultContent = resultd.Content.ReadAsStringAsync().Result;
-              
+
 
                 JObject j = JObject.Parse(resultContent);
                 int tabcount = GetTableCount();
@@ -467,12 +640,12 @@ namespace Server.PageServer
                 {
                     result.message = j["message"].ToString();
                 }
-                result.data = new { tabcount = tabcount};
+                result.data = new { tabcount = tabcount };
                 return result;
             }
 
         }
-        public async Task<ResultModel<object>> UploadQL(string Phone,string ck,string ckpin , int qlkey)
+        public async Task<ResultModel<object>> UploadQL(string Phone, string ck, string ckpin, int qlkey)
         {
             ResultModel<object> result = ResultModel<object>.Create(false, "");
             var qlconfig = _mainConfig.GetConfig(qlkey);
@@ -481,13 +654,12 @@ namespace Server.PageServer
             Nickname = await GetNickname(ck);
             JArray data = await qlconfig.GetEnv();
             JToken env = null;
-            var QLCount = 0;
+            var QLCount = await qlconfig.GetEnvsCount(); ;
             if (data != null)
             {
                 env = data.FirstOrDefault(x => x["value"].ToString().Contains("pt_pin=" + ckpin + ";"));
-                QLCount = data.Count;
-            }
 
+            }
             string QLId = "";
             string timestamp = "";
             if (env == null)
@@ -499,10 +671,12 @@ namespace Server.PageServer
                     return result;
                 }
 
-                var addresult = await qlconfig.AddEnv(ck, Nickname);
+                var addresult = await qlconfig.AddEnv(ck, "JD_COOKIE",Nickname);
                 JObject addUser = (JObject)addresult.data[0];
                 QLId = addUser["_id"].ToString();
                 timestamp = addUser["timestamp"].ToString();
+
+                await _mainConfig.pushPlusNotify(@" 服务器;" + qlconfig.QLkey + " " + qlconfig.QLName + "  <br>用户 " + Nickname + "   " + ckpin + " 已上线");
             }
             else
             {
@@ -511,8 +685,9 @@ namespace Server.PageServer
                     Nickname = env["remarks"].ToString();
 
 
-                var upresult = await qlconfig.UpdateEnv(ck, QLId, Nickname);
+                var upresult = await qlconfig.UpdateEnv(ck, QLId, "JD_COOKIE", Nickname);
                 timestamp = upresult.data["timestamp"].ToString();
+                await _mainConfig.pushPlusNotify(@" 服务器;" + qlconfig.QLkey + " " + qlconfig.QLName + "  <br>用户 " + Nickname + "   " + ckpin + " 已更新 CK");
             }
             await qlconfig.Enable(QLId);
             var qin = await getCount(qlkey);
@@ -552,15 +727,6 @@ namespace Server.PageServer
             await Setphone(Phone, page);
             var CodeBtn = await page.XPathAsync("//button[@report-eventid='MLoginRegister_SMSReceiveCode']");
             var CodeProperties = await CodeBtn[0].GetPropertiesAsync();
-
-            ///var url = await CodeBtn[0].EvaluateFunctionAsync<string>("e => e.setAttribute('class','active')");
-            //await page.evaluate((el, value) => el.setAttribute('style', value),el.setAttribute('style', value
-            //            divHandle,
-            //            'background: #0FF'
-            //    )
-            // CodeBtn[0].EvaluateFunctionAsync
-            //page.ev
-            // CodeBtn.Append
             var CodeBtnClasses = CodeProperties["_prevClass"].ToString().Split(" ");
             Console.WriteLine(CodeProperties["_prevClass"].ToString());
             bool canSendCode = CodeBtnClasses.Contains("active");
@@ -602,8 +768,31 @@ namespace Server.PageServer
             }
             catch (Exception e)
             {
-                Console.WriteLine("获取nickname出错:"+e.Message);
-                return "未知";
+                try
+                {
+                    using (HttpClient client = new HttpClient())
+                    {
+
+                        client.DefaultRequestHeaders.Add("Cookie", cookie);
+                        client.DefaultRequestHeaders.Add("Referer", "https://home.m.jd.com/myJd/newhome.action");
+                        client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36");
+                        client.DefaultRequestHeaders.Add("Host", "me-api.jd.com");
+                        var result = await client.GetAsync("https://wq.jd.com/user_new/info/GetJDUserInfoUnion?orgFlag=JD_PinGou_New&callSource=mainorder");
+                        string resultContent = result.Content.ReadAsStringAsync().Result;
+                        Console.WriteLine("获取nickname");
+                        JObject j = JObject.Parse(resultContent);
+                        // data?.userInfo.baseInfo.nickname
+                        return j["data"]["userInfo"]["baseInfo"]["nickname"].ToString();
+
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString()); ;
+                    return "未知";
+                }
+              
             }
 
 
@@ -624,12 +813,13 @@ namespace Server.PageServer
         {
             try
             {
-                await page.WaitForTimeoutAsync(1000);
+                await page.WaitForTimeoutAsync(500);
                 // 打开京东App，购物更轻松
                 string js = "document.body.outerText";
                 var pageouterText = await page.EvaluateExpressionAsync(js);
                 var pagetext = pageouterText.ToString();
-                if (pagetext.Contains("重新获取") || pagetext.Contains("短信验证码发送次数已达上限") || pagetext.Contains("该手机号未注册，将为您直接注册。") )
+                DebugLOG("AwitAutoCaptcha 等待判断滑块完成", pagetext);
+                if (pagetext.Contains("重新获取") || pagetext.Contains("验证失败，请重新验证") || pagetext.Contains("拖动滑块填充拼图") || pagetext.Contains("短信验证码发送次数已达上限") || pagetext.Contains("该手机号未注册，将为您直接注册。") || pagetext.Contains("您的账号存在风险"))
                 {
                     return true;
                 }
@@ -644,9 +834,127 @@ namespace Server.PageServer
             }
 
         }
+        public void DebugLOG(string Fnc, string ms)
+        {
+            if (string.IsNullOrEmpty(_mainConfig.Debug)) return;
+            Console.WriteLine("执行阶段  :" + Fnc);
+            Console.WriteLine(ms);
+            Console.WriteLine("-------------------------------------------------------------------");
+        }
+        public async Task<(string big, string small)> GetIMG(Page page, int time = 500)
+        {
+            await page.WaitForTimeoutAsync(time);
+            var cpc_img = await page.QuerySelectorAsync("#cpc_img");
+            var cpc_imgheader = await cpc_img.GetPropertyAsync("src");
+            var cpc_imgsrc = await cpc_imgheader.JsonValueAsync();
+            var small_img = await page.QuerySelectorAsync("#small_img");
+            var small_imgheader = await small_img.GetPropertyAsync("src");
+            var small_imgsrc = await small_imgheader.JsonValueAsync();
+            string pattern = @"data:image.*base64,(.*)";
+            Match m = Regex.Match(cpc_imgsrc.ToString(), pattern);
+            var cpc_imgbase64 = m.Groups[1].ToString();
+            Match m2 = Regex.Match(small_imgsrc.ToString(), pattern);
+            var small_imgbase64 = m2.Groups[1].ToString();
+            return (cpc_imgbase64, small_imgbase64);
+        }
+
+        public async Task<ResultModel<object>> VerifyCaptcha(string Phone, List<SliderCaptchaData> Pointlist)
+        {
+            ResultModel<object> result = ResultModel<object>.Create(false, "");
+            var page = GetPage(Phone);
+            if (page == null)
+            {
+                result.message = "未找到当前号码的网页请稍候再试,或者网页超过" + _mainConfig.Closetime + "分钟已被回收,请刷新重试";
+                result.data = new { Status = 404 };
+                return result;
+            }
+            if (Pointlist.Count == 0)
+            {
+                var imgdata = await GetIMG(page);
+                Console.WriteLine("验证失败");
+                result.data = new { Status = 666, big = imgdata.big, small = imgdata.small };
+                return result;
+            }
+            var baseimg = await GetIMG(page);
+            byte[] cpc_imgBytes = Convert.FromBase64String(baseimg.big);
+            byte[] small_imgbaseBytes = Convert.FromBase64String(baseimg.small);
+            Stream cpcstream = new MemoryStream(cpc_imgBytes);
+            Stream smallstream = new MemoryStream(small_imgbaseBytes);
+            var cpcmap = new Bitmap(new Bitmap(cpcstream));
+            var smallmap = new Bitmap(new Bitmap(smallstream));
+            var Rsct = cv.getOffsetX(cpcmap, smallmap);
+            cpcmap.Dispose();
+            cpcstream.Close();
+            smallstream.Close();
+            smallmap.Dispose();
+            var slider = await page.WaitForXPathAsync("//div[@class='sp_msg']/img");
+            var box = await slider.BoundingBoxAsync();
+            await page.Mouse.MoveAsync(box.X, box.Y);
+            await page.Mouse.DownAsync();
+            Random r = new Random(Guid.NewGuid().GetHashCode());
+            var Width = r.Next(0, 2);
+            int MaxX = Rsct.X + Rsct.Width + Width;
+            var Steps = r.Next(1, 10);
+            decimal y = 0;
+            Console.WriteLine("停顿" + Steps);
+            foreach (var item in Pointlist)
+            {
+                y = box.Y + item.Y;
+                await page.Mouse.MoveAsync(box.X + item.X, box.Y + item.Y, new PuppeteerSharp.Input.MoveOptions { Steps = Steps });
+            }
+            await page.Mouse.MoveAsync(MaxX, y, new PuppeteerSharp.Input.MoveOptions { Steps = Steps });
+            await page.Mouse.UpAsync();
+            await AwitAutoCaptcha(page);
+            string js = "document.body.outerText";
+            var pageouterText = await page.EvaluateExpressionAsync(js);
+            var html = pageouterText.ToString();
+            DebugLOG("AutoCaptcha 自动滑块完成判断是否获取", html);
+
+            if (html.Contains("重新获取"))
+            {
+                Console.WriteLine("验证成功");
+                result.success = true;
+            }
+            else
+            {
+                if (html.Contains("短信验证码发送次数已达上限"))
+                {
+                    await PageClose(Phone);
+                    result.data = new { Status = 505 };
+                    result.message = "对不起，" + Phone + "短信验证码发送次数已达上限，请24小时后再试。";
+                    return result;
+                }
+                if (html.Contains("该手机号未注册，将为您直接注册。"))
+                {
+                    await PageClose(Phone);
+
+                    result.data = new { Status = 505 };
+                    result.message = "该手机号" + Phone + "未注册";
+                    return result;
+                }
+                if (html.Contains("您的账号存在风险"))
+                {
+                    await PageClose(Phone);
+
+                    result.data = new { Status = 505 };
+                    result.message = "该手机号" + Phone + "存在风险";
+                    return result;
+                }
+                if (html.Contains("验证失败，请重新验证"))
+                {
+                    await page.WaitForTimeoutAsync(1000);
+                }
+                var imgdata2 = await GetIMG(page, 0);
+                Console.WriteLine("验证失败");
+                result.data = new { Status = 666, big = imgdata2.big, small = imgdata2.small };
+            }
+            return result;
+        }
         public async Task<ResultModel<object>> AutoCaptcha(string Phone)
         {
-            Console.WriteLine(Phone + "安全验证破解");
+            ResultModel<object> result = ResultModel<object>.Create(false, "");
+            Console.WriteLine(Phone + "滑块安全验证");
+
             var page = GetPage(Phone);
             var cpc_img = await page.QuerySelectorAsync("#cpc_img");
             var cpc_imgheader = await cpc_img.GetPropertyAsync("src");
@@ -666,28 +974,21 @@ namespace Server.PageServer
             var cpcmap = new Bitmap(new Bitmap(cpcstream));
             var smallmap = new Bitmap(new Bitmap(smallstream));
             var Rsct = cv.getOffsetX(cpcmap, smallmap);
+            Console.WriteLine(Phone + "获取到坐标 X" + Rsct.X);
+            var bw = cpcmap.Width;
             cpcmap.Dispose();
             cpcstream.Close();
             smallstream.Close();
             smallmap.Dispose();
-            var list = cv.GetPoints2(Rsct);
-            var slider = await page.WaitForXPathAsync("//div[@class='sp_msg']/img");
-            var box = await slider.BoundingBoxAsync();
-            await page.Mouse.MoveAsync(box.X, box.Y);
-            await page.Mouse.DownAsync();
-            Random r = new Random(Guid.NewGuid().GetHashCode());
-            var Steps = r.Next(10, 15);
-            foreach (var item in list)
-            {
-                await page.Mouse.MoveAsync(item.X, box.Y, new PuppeteerSharp.Input.MoveOptions { Steps = Steps });
-
-            }
-            await page.Mouse.UpAsync();
+            //var list = cv.GetPoints(Rsct, bw);
+            //Console.WriteLine("轨迹数量;"+list.Count);
+            PageMove.PageMove move = new PageMove.PageMove();
+            await move.Move(page, Rsct);
             await AwitAutoCaptcha(page);
             string js = "document.body.outerText";
             var pageouterText = await page.EvaluateExpressionAsync(js);
             var html = pageouterText.ToString();
-            ResultModel<object> result = ResultModel<object>.Create(false, "");
+            DebugLOG("AutoCaptcha 自动滑块完成判断是否获取", html);
             if (html.Contains("重新获取"))
             {
                 Console.WriteLine("验证成功");
@@ -699,7 +1000,7 @@ namespace Server.PageServer
                 {
                     await PageClose(Phone);
                     result.data = new { Status = 505 };
-                    result.message = "对不起，短信验证码发送次数已达上限，请24小时后再试。";
+                    result.message = "对不起，" + Phone + "短信验证码发送次数已达上限，请24小时后再试。";
                     return result;
                 }
                 if (html.Contains("该手机号未注册，将为您直接注册。"))
@@ -707,13 +1008,80 @@ namespace Server.PageServer
                     await PageClose(Phone);
 
                     result.data = new { Status = 505 };
-                    result.message = "该手机号未注册";
+                    result.message = "该手机号" + Phone + "未注册";
                     return result;
                 }
+                if (html.Contains("您的账号存在风险"))
+                {
+                    await PageClose(Phone);
+
+                    result.data = new { Status = 505 };
+                    result.message = "该手机号" + Phone + "存在风险";
+                    return result;
+                }
+                var imgdata2 = await GetIMG(page);
                 Console.WriteLine("验证失败");
-                result.data = new { Status = 666 };
+                result.data = new { Status = 666, big = imgdata2.big, small = imgdata2.small };
             }
             return result;
+        }
+
+        public async Task<string> WSkeyGetToken(string WSKEY)
+        {
+            var sv = "";
+            var st = "";
+            var uuid = "";
+            var sign = "";
+            var clientVersion = "";
+            using (HttpClient client2 = new HttpClient())
+            {
+
+                // client.Headers
+                var resultd = client2.GetAsync("https://hellodns.coding.net/p/sign/d/jsign/git/raw/master/sign").Result;
+                string resultContent = resultd.Content.ReadAsStringAsync().Result;
+                JObject j = JObject.Parse(resultContent);
+                sv = j["sv"] != null ? j["sv"].ToString() : "";
+                st = j["st"] != null ? j["st"].ToString() : "";
+                uuid = j["uuid"] != null ? j["uuid"].ToString() : "";
+                sign = j["sign"] != null ? j["sign"].ToString() : "";
+                clientVersion = j["clientVersion"] != null ? j["clientVersion"].ToString() : "";
+            }
+            if (sv == "" || st == "" || uuid == "" || sign == "") throw new Exception("获取JD签名接口失效。请联系Nolan");
+            Requset requset = new Requset();
+            var Uri = new Uri($"https://api.m.jd.com/client.action?functionId=genToken&clientVersion=10.1.2&client=android&uuid=" + uuid + "&sign=" + sign + "&st=" + st + "&sv=" + sv);
+            var headers = new Dictionary<string, string>();
+            var pararms = new List<RestSharp.Parameter>();
+            var pin = Regex.Match(WSKEY, "pin=(.*?);").Value.UrlEncode();
+            var key = Regex.Match(WSKEY, "wskey=(.*?);").Value;
+
+            if (string.IsNullOrWhiteSpace(pin) && string.IsNullOrWhiteSpace(key))
+            {
+                throw new Exception("wskey格式不正确");
+            }
+
+           // WSKEY = $"pin={pin};{key}";
+            headers.Add("cookie", $"{WSKEY}");
+
+            pararms.Add(new RestSharp.Parameter("application/x-www-form-urlencoded", "body=%7B%22action%22%3A%22to%22%2C%22to%22%3A%22https%253A%252F%252Fplogin.m.jd.com%252Fcgi-bin%252Fm%252Fthirdapp_auth_page%253Ftoken%253DAAEAIEijIw6wxF2s3bNKF0bmGsI8xfw6hkQT6Ui2QVP7z1Xg%2526client_type%253Dandroid%2526appid%253D879%2526appup_type%253D1%22%7D&", ParameterType.RequestBody));
+
+            var Content = await requset.HttpRequset(Uri, RestSharp.Method.POST, headers, pararms);
+            if(Content == null|| (int)Content["code"] != 0) throw new Exception("WSKEY检查状态接口出错, 请稍后尝试");
+
+            var client = new RestClient("https://un.m.jd.com/cgi-bin/app/appjmp?tokenKey=" + (string)Content["tokenKey"] + "&to=https://plogin.m.jd.com/cgi-bin/m/thirdapp_auth_page?token=AAEAIEijIw6wxF2s3bNKF0bmGsI8xfw6hkQT6Ui2QVP7z1Xg&client_type=android&appid=879&appup_type=1");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.GET);
+            var response = await client.ExecuteAsync(request);
+            var CKkey = response.Cookies.FirstOrDefault(x => x.Name == "pt_key");
+            var CKpin = response.Cookies.FirstOrDefault(x => x.Name == "pt_pin");
+            if (CKkey == null || CKpin == null)
+            {
+                throw new Exception("通过WSKYE获取Cookie失败");
+            }
+           if (CKkey.Value.Contains("fake")) throw new Exception("wsck状态失效或填写错误");
+
+            //    var Cookies = response.Cookies;
+            var CCookie = CKkey.Name + "=" + CKkey.Value + ";" + CKpin.Name + "=" + CKpin.Value + ";";
+            return CCookie;
         }
     }
 }

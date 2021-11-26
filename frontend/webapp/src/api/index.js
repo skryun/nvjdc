@@ -21,8 +21,14 @@ export function SendSMS(body) {
 export function AutoCaptcha(body) {
   return api.post('AutoCaptcha', { json: body }).json()
 }
+export function UploadWSKEY(body) {
+  return api.post('UploadWSKEY', { json: body }).json()
+}
 export function VerifyCode(body) {
     return api.post('VerifyCode', { json: body }).json()
+}
+export function VerifyCaptcha(body) {
+  return api.post('VerifyCaptcha', { json: body }).json()
 }
 export function Upremarksapi(body) {
   return api.post('Upremarks', { json: body }).json()

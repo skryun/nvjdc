@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 module.exports = {
     //webpack配置
 	outputDir: "../../backend/NETJDC/wwwroot",
@@ -6,6 +7,13 @@ module.exports = {
 	    performance: {
 		    hints:false
 	    },
+		plugins: [
+			new webpack.ProvidePlugin({
+			  $: 'jquery',         // 创建 '$'、'jQuery'、'window.jQuery' 三个变量指向依赖jquery
+			  jQuery: 'jquery',
+			  'window.jQuery': 'jquery'
+			})
+		],
 	    performance: {
 	    	hints:'warning',
 	    	//入口起点的最大体积

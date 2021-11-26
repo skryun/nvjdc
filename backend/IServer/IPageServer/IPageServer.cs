@@ -10,6 +10,8 @@ namespace IServer.IPageServer
 {
     public interface IPageServer
     {
+        public void info();
+        public Task<bool> CCHECK();
         /// <summary>
         /// 检查浏览器是否下载
         /// </summary>
@@ -27,7 +29,7 @@ namespace IServer.IPageServer
         /// <param name="qlkey"></param>
         /// <param name="Phone"></param>
         /// <returns></returns>
-        public Task<ResultModel<object>> OpenJDTab(int qlkey, string Phone);
+        public Task<ResultModel<object>> OpenJDTab(int qlkey, string Phone, bool UploadQL = true);
 
         /// <summary>
         /// 验证验证码
@@ -36,7 +38,7 @@ namespace IServer.IPageServer
         /// <param name="Phone"></param>
         /// <param name="Code"></param>
         /// <returns></returns>
-        public Task<ResultModel<object>> VerifyCode(int qlkey, string Phone, string Code);
+        public Task<ResultModel<object>> VerifyCode(int qlkey, string qq, string Phone, string Code);
         /// <summary>
         /// 重新发送验证码
         /// </summary>
@@ -44,7 +46,11 @@ namespace IServer.IPageServer
         /// <returns></returns>
         public Task ReSendSmSCode(string Phone);
 
+        public Task<ResultModel<object>> VerifyCaptcha(string Phone, List<SliderCaptchaData> Pointlist);
         public Task<ResultModel<object>> AutoCaptcha(string Phone);
+
         public int GetPageCount();
+
+        public Task<string> WSkeyGetToken(string WSKEY);
     }
 }

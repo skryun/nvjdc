@@ -8,8 +8,10 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "clipboard": "^2.0.8",
     "core-js": "^3.6.5",
     "element-plus": "^1.0.2-beta.28",
+    "jquery": "^3.6.0",
     "ky": "^0.28.6",
     "sass": "^1.43.2",
     "sass-loader": "^10.1.1",

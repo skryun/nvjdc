@@ -78,13 +78,17 @@ namespace NETJDC
             {
                 endpoints.MapControllers();
             });
-
+            IPageServer testServer = serviceProvider.GetService<IPageServer>();
+            testServer.info();
             Console.WriteLine("初始化项目");
+            Console.WriteLine("-------------------------------------------------------------------------------------");
             Console.WriteLine("第一次运行会下载Chromium,后续只是检查是否下载");
             Console.WriteLine("检查中....");
-            IPageServer testServer = serviceProvider.GetService<IPageServer>();
             var aa = testServer.BrowserInit().Result;
             Console.WriteLine(aa);
+            Console.WriteLine("程序配置自检 ");
+            Console.WriteLine("如果报错请检查配置或者检查配置是否挂载");
+            var dd = testServer.CCHECK().Result;
             Console.WriteLine("检查成功");
             Console.WriteLine("NETJDC started");
 

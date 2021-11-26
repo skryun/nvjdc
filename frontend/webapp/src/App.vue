@@ -12,6 +12,7 @@
 import {  onMounted,reactive, toRefs } from 'vue'
 import Header from '@/components/Header.vue'
 import { getQLTitle} from '@/api/index'
+
 export default {
   name: 'App',
   components: {
@@ -36,6 +37,10 @@ export default {
 </script>
 
 <style>
+html{
+  touch-action: none;
+  touch-action: pan-y;
+}
 body{
   margin: 0px;
 }

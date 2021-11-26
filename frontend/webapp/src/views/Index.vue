@@ -12,6 +12,8 @@
             <p>更新时间：{{ timestamp }}</p>
           </div>
           <div class="card-footer">
+              <el-button id="btncopy" type="primary" size="small" :data-clipboard-text="ck" auto @click="CopyCK"
+              >复制CK</el-button>
             <el-button size="small" auto @click="logout">退出登录</el-button>
             <el-button type="danger" size="small" auto @click="delAccount"
               >删除账号</el-button>
@@ -86,25 +88,8 @@
       </el-card>
      </el-col>
   </el-row>
-  <el-row>
-    <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-    <el-col :span="8"><div class="grid-content bg-purple-light"></div></el-col>
-    <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-  </el-row>
-  <el-row>
-    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-    <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-    <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-  </el-row>
-  <el-row>
-    <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-    <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-    <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-    <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-    <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-    <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-  </el-row>
+ 
+ 
 </template>
 
 <style>
@@ -166,6 +151,7 @@ import { onMounted, reactive, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
 import { getUserInfoAPI,Upremarksapi,delAccountAPI} from '@/api/index'
 import { ElMessage } from 'element-plus'
+import Clipboard from 'clipboard'
 export default {
  setup() {
    const router = useRouter()
@@ -175,6 +161,7 @@ export default {
       timestamp: undefined,
       remarks:"",
       qrurl:"",
+      ck:"",
       qrshow:false,
     })
     const getInfo = async () => {
@@ -194,6 +181,7 @@ export default {
         localStorage.setItem("qlky",userInfo.data.qlky);
        data.nickname = userInfo.data.nickname;
        data.qrurl=  userInfo.data.qrurl;
+       data.ck=userInfo.data.ck;
       if(data.qrurl!="") data.qrshow=true
        data.timestamp = new Date(userInfo.data.timestamp).toLocaleString();
        data.remarks=userInfo.data.remarks;
@@ -230,7 +218,22 @@ export default {
         }, 1000)
       }
     }
-
+  const CopyCK=async () => {
+     var clipboard = new Clipboard('#btncopy') // 这里可以理解为选择器，选择上面的复制按钮
+    clipboard.on('success', () => {
+        console.log('复制成功')
+        ElMessage.success("复制成功")
+       
+        clipboard.destroy()
+    })
+    clipboard.on('error', () => {
+       
+        console.log('复制失败')
+        ElMessage.error("复制失败");
+        // 释放内存
+        clipboard.destroy()
+    })
+  }
     const openUrlWithJD = (url) => {
       const params = encodeURIComponent(
         `{"category":"jump","des":"m","action":"to","url":"${url}"}`
@@ -299,6 +302,7 @@ export default {
       ...toRefs(data),
       activity,
       getInfo,
+      CopyCK,
       logout,
       delAccount,
       upAccount,

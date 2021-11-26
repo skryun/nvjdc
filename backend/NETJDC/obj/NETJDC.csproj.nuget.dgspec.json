@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\nvjdc\\backend\\NETJDC\\NETJDC.csproj": {}
+    "E:\\03工作源码\\NETJDC\\NETJDC\\NETJDC.csproj": {}
   },
   "projects": {
-    "E:\\nvjdc\\backend\\IServer\\IServer.csproj": {
+    "E:\\03工作源码\\NETJDC\\IServer\\IServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\nvjdc\\backend\\IServer\\IServer.csproj",
+        "projectUniqueName": "E:\\03工作源码\\NETJDC\\IServer\\IServer.csproj",
         "projectName": "IServer",
-        "projectPath": "E:\\nvjdc\\backend\\IServer\\IServer.csproj",
+        "projectPath": "E:\\03工作源码\\NETJDC\\IServer\\IServer.csproj",
         "packagesPath": "D:\\Nuget\\Package",
-        "outputPath": "E:\\nvjdc\\backend\\IServer\\obj\\",
+        "outputPath": "E:\\03工作源码\\NETJDC\\IServer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -33,8 +33,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\nvjdc\\backend\\Systems\\Systems.csproj": {
-                "projectPath": "E:\\nvjdc\\backend\\Systems\\Systems.csproj"
+              "E:\\03工作源码\\NETJDC\\Systems\\Systems.csproj": {
+                "projectPath": "E:\\03工作源码\\NETJDC\\Systems\\Systems.csproj"
               }
             }
           }
@@ -67,14 +67,14 @@
         }
       }
     },
-    "E:\\nvjdc\\backend\\NETJDC\\NETJDC.csproj": {
+    "E:\\03工作源码\\NETJDC\\NETJDC\\NETJDC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\nvjdc\\backend\\NETJDC\\NETJDC.csproj",
+        "projectUniqueName": "E:\\03工作源码\\NETJDC\\NETJDC\\NETJDC.csproj",
         "projectName": "NETJDC",
-        "projectPath": "E:\\nvjdc\\backend\\NETJDC\\NETJDC.csproj",
+        "projectPath": "E:\\03工作源码\\NETJDC\\NETJDC\\NETJDC.csproj",
         "packagesPath": "D:\\Nuget\\Package",
-        "outputPath": "E:\\nvjdc\\backend\\NETJDC\\obj\\",
+        "outputPath": "E:\\03工作源码\\NETJDC\\NETJDC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -96,14 +96,14 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\nvjdc\\backend\\IServer\\IServer.csproj": {
-                "projectPath": "E:\\nvjdc\\backend\\IServer\\IServer.csproj"
+              "E:\\03工作源码\\NETJDC\\IServer\\IServer.csproj": {
+                "projectPath": "E:\\03工作源码\\NETJDC\\IServer\\IServer.csproj"
               },
-              "E:\\nvjdc\\backend\\Server\\Server.csproj": {
-                "projectPath": "E:\\nvjdc\\backend\\Server\\Server.csproj"
+              "E:\\03工作源码\\NETJDC\\Server\\Server.csproj": {
+                "projectPath": "E:\\03工作源码\\NETJDC\\Server\\Server.csproj"
               },
-              "E:\\nvjdc\\backend\\Systems\\Systems.csproj": {
-                "projectPath": "E:\\nvjdc\\backend\\Systems\\Systems.csproj"
+              "E:\\03工作源码\\NETJDC\\Systems\\Systems.csproj": {
+                "projectPath": "E:\\03工作源码\\NETJDC\\Systems\\Systems.csproj"
               }
             }
           }
@@ -149,107 +149,14 @@
         }
       }
     },
-    "E:\\nvjdc\\backend\\Server\\Server.csproj": {
+    "E:\\03工作源码\\NETJDC\\PageMove\\PageMove.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\nvjdc\\backend\\Server\\Server.csproj",
-        "projectName": "Server",
-        "projectPath": "E:\\nvjdc\\backend\\Server\\Server.csproj",
+        "projectUniqueName": "E:\\03工作源码\\NETJDC\\PageMove\\PageMove.csproj",
+        "projectName": "PageMove",
+        "projectPath": "E:\\03工作源码\\NETJDC\\PageMove\\PageMove.csproj",
         "packagesPath": "D:\\Nuget\\Package",
-        "outputPath": "E:\\nvjdc\\backend\\Server\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\huanzhongyao\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net5.0"
-        ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {},
-          "https://www.nuget.org/api/v2/": {}
-        },
-        "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
-            "projectReferences": {
-              "E:\\nvjdc\\backend\\IServer\\IServer.csproj": {
-                "projectPath": "E:\\nvjdc\\backend\\IServer\\IServer.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
-          "dependencies": {
-            "OpenCvSharp4": {
-              "target": "Package",
-              "version": "[4.5.3.20210817, )"
-            },
-            "OpenCvSharp4.runtime.centos7-x64": {
-              "target": "Package",
-              "version": "[4.0.0.20190129, )"
-            },
-            "OpenCvSharp4.runtime.linux-arm": {
-              "target": "Package",
-              "version": "[4.5.3.20210817, )"
-            },
-            "OpenCvSharp4.runtime.linux-arm64.cuda": {
-              "target": "Package",
-              "version": "[4.5.2.20210803, )"
-            },
-            "OpenCvSharp4.runtime.ubuntu.18.04-x64": {
-              "target": "Package",
-              "version": "[4.5.3.20210817, )"
-            },
-            "OpenCvSharp4.runtime.win": {
-              "target": "Package",
-              "version": "[4.5.3.20210817, )"
-            },
-            "PuppeteerSharp": {
-              "target": "Package",
-              "version": "[5.1.0, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "E:\\nvjdc\\backend\\Systems\\Systems.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "E:\\nvjdc\\backend\\Systems\\Systems.csproj",
-        "projectName": "Systems",
-        "projectPath": "E:\\nvjdc\\backend\\Systems\\Systems.csproj",
-        "packagesPath": "D:\\Nuget\\Package",
-        "outputPath": "E:\\nvjdc\\backend\\Systems\\obj\\",
+        "outputPath": "E:\\03工作源码\\NETJDC\\PageMove\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -282,6 +189,159 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\03工作源码\\NETJDC\\Server\\Server.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\03工作源码\\NETJDC\\Server\\Server.csproj",
+        "projectName": "Server",
+        "projectPath": "E:\\03工作源码\\NETJDC\\Server\\Server.csproj",
+        "packagesPath": "D:\\Nuget\\Package",
+        "outputPath": "E:\\03工作源码\\NETJDC\\Server\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\huanzhongyao\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://www.nuget.org/api/v2/": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "E:\\03工作源码\\NETJDC\\IServer\\IServer.csproj": {
+                "projectPath": "E:\\03工作源码\\NETJDC\\IServer\\IServer.csproj"
+              },
+              "E:\\03工作源码\\NETJDC\\PageMove\\PageMove.csproj": {
+                "projectPath": "E:\\03工作源码\\NETJDC\\PageMove\\PageMove.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "OpenCvSharp4": {
+              "target": "Package",
+              "version": "[4.5.3.20210817, )"
+            },
+            "OpenCvSharp4.Windows": {
+              "target": "Package",
+              "version": "[4.5.3.20210817, )"
+            },
+            "OpenCvSharp4.runtime.win": {
+              "target": "Package",
+              "version": "[4.5.3.20210817, )"
+            },
+            "PuppeteerSharp": {
+              "target": "Package",
+              "version": "[5.1.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\03工作源码\\NETJDC\\Systems\\Systems.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\03工作源码\\NETJDC\\Systems\\Systems.csproj",
+        "projectName": "Systems",
+        "projectPath": "E:\\03工作源码\\NETJDC\\Systems\\Systems.csproj",
+        "packagesPath": "D:\\Nuget\\Package",
+        "outputPath": "E:\\03工作源码\\NETJDC\\Systems\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\huanzhongyao\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://www.nuget.org/api/v2/": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "RestSharp": {
+              "target": "Package",
+              "version": "[106.13.0, )"
+            },
+            "System.Management": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

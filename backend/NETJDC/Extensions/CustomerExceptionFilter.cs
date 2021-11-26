@@ -24,6 +24,7 @@ namespace NETJDC.Extensions
                 // 定义返回类型
                 var result = ResultModel<object>.Create(false, "");
                 result.message = context.Exception.Message;
+                Console.WriteLine(context.Exception.ToString());
                 context.Result = new ContentResult
                 {
                     // 返回状态码设置为200，表示成功

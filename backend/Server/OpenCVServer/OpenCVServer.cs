@@ -10,15 +10,27 @@ namespace Server.OpenCVServer
 {
     public class OpenCVServer
     {
+        public List<Point> GetPoints(Rect rect,int Width)
+        {
+            //return GetPoints2(rect);
+            var nn = GetRandNum(1, 10);
+            if (nn <2)
+                return GetPoints2(rect);
+            else
+                return GetPoints1(rect);
+        }
+
         public List<Point> GetPoints2(Rect rect)
         {
+            Console.WriteLine("垫刀轨迹 ");
             var nn = GetRandNum(1, 3);
             var t = Math.Round(nn * 0.1, 2);
             var rate = t * GetRandNum(1, 3);
             var tv = Math.Round(GetRandNum(1, 9) * 0.01, 2);
             List<Point> points = new List<Point>();
-            int MaxX = rect.X + rect.Width * 3 + GetRandNum(1, 3);
-            int NMaxX = rect.X + rect.Width + GetRandNum(1, 3);
+            int MaxX = rect.X + rect.Width * 3 + GetRandNum(0, 2);
+            if (MaxX >= 269) MaxX = 270;
+            int NMaxX = rect.X + rect.Width + GetRandNum(0, 2);
             int a = Convert.ToInt32(MaxX / t);
             if (MaxX % t != 0)
                 a++;
@@ -56,14 +68,15 @@ namespace Server.OpenCVServer
             points.Add(point2);
             return points;
         }
-        public List<Point> GetPoints(Rect rect)
+        public List<Point> GetPoints1(Rect rect)
         {
+            Console.WriteLine("滑块一");
             var nn = GetRandNum(1, 3);
             var t = Math.Round(nn * 0.1, 2);
             var rate = t * GetRandNum(1, 3);
             var tv = Math.Round(GetRandNum(1, 9) * 0.01, 2);
             List<Point> points = new List<Point>();
-            int MaxX = rect.X + rect.Width + GetRandNum(1, 3);
+            int MaxX = rect.X + rect.Width + GetRandNum(-4, -1);
             int a = Convert.ToInt32(MaxX / t);
             if (MaxX % t != 0)
                 a++;
